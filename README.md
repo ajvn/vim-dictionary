@@ -63,6 +63,7 @@ No mapping is provided, use function `:WordDefinition` to find under-cursor
 word definition.
 
 Alternatively, create mappings of your own liking.
+
 Example:
 ```
 " Enables plugin when working in text or markdown files:
