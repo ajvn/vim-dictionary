@@ -24,17 +24,12 @@ CONTENTS                                                    *dictionary-content*
     4. Reference & Credit................|dictionary-reference|
 ================================================================================
 INTRODUCTION                                           *dictionary-introduction*
-Vim-dictionary plugin was created out of author's need to quickly look up
-definition of specific English words while reading a book or technical
-documentation.
+Vim-dictionary plugin was created out of the need to quickly look up definition
+of specific English words while reading a book or technical documentation.
 
-It provides a single function that does just that, and utilizes excellent DICT
-protocol client `dict`.
+It uses WordNet dictionary by default, however this option is configurable.
 
-As author exclusively uses Linux, current implementation is meant to work only
-on that platform.
-Users are free to try using it on Darwin or other platforms, but that has not
-been tested.
+Current implementation has only been tested on Linux.
 ================================================================================
 INSTALL                                                     *dictionary-install*
 Prerequisites:
@@ -42,9 +37,9 @@ Prerequisites:
         - Fedora: https://src.fedoraproject.org/rpms/dictd
         - Ubuntu: https://manpages.ubuntu.com/manpages/bionic/man1/dict.1.html
         - Arch:   https://archlinux.org/packages/?name=dictd
-    * Internet connection
+    * Internet connection (steps are available for offline dictionary setup)
 
-Installation relies on vim-plug system.
+Installation relies on `vim-plug` system.
     * https://github.com/junegunn/vim-plug
 
 Steps:
@@ -60,32 +55,67 @@ Steps:
 <
 ================================================================================
 USAGE                                                         *dictionary-usage*
-No mapping is provided, use function `:WordDefinition` to find under-cursor
-word definition.
+There are two functions, one that looks up words in dictionaries hosted on the
+internet, and other which supports offline dictionaries, running on a local
+instance of `dictd` server.
 
-Alternatively, create mappings of your own liking.
+* `WordDefinition` - this function uses public dict.org instance (depending on
+the platform and configuration).
+* `WordDefinitionOfflineDictionary` - this function uses local `dictd` instance.
+
+WordNet dictionary is used by default when using online approach, but this is
+configurable by using `b:word_dictionary` variable.
+
 Example: >
-    " Enables plugin when working in text or markdown files:
-    .vimrc
-        let mapleader=';'
-        augroup word_definition
-        :   autocmd!
-        :   autocmd FileType markdown,text
-                \ nmap <leader>wd :WordDefinition<CR>
-        augroup END
+    $ $EDITOR ~/.vim/ftplugin/text.vim
+    set colorcolumn=80
+    let b:word_dictionary="gcide"
+    nmap <leader>wd :WordDefinition<CR><ESC>
 <
+With offline approach, plugin will use whichever dictionary or dictionaries
+user setup on their `dictd` instance.
 
+No mappings are set by default, if you'd like to use some, here is additional
+example: >
+    " Enables plugin when working in text or markdown files:
+    $ $EDITOR ~/.vimrc
+    let mapleader=';'
+    augroup word_definition
+    :   autocmd!
+    :   autocmd FileType markdown,text
+            \ nmap <leader>wd :WordDefinition<CR>
+    augroup END
+<
 In Vim normal mode use `<;-wd>` to get definition pop-up.
+
+Alternatively, use `~/.vim/ftplugin` approach.
+
+Offline dictionary~
+It is possible to setup offline dictionary, depending on your platform this
+might be more or less straightforward. Focus in provided examples is on WordNet
+dictionary, but you are free to use any others you like.
+
+Support relies on `dictd` package which provides local (or publicly exposed
+self-hosted server if this is something you'd like to host) `dict` server.
+
+Use `WordDefinitionOfflineDictionary` function to use offline dictionary served
+by `dictd` instance running on your machine.
+
+Please refer to https://github.com/ajvn/vim-dictionary#offline-dictionary for
+steps on how to setup required packages and files on Linux machines.
 ================================================================================
 REFERENCE & CREDITS                                       *dictionary-reference*
-Knowledge base which helped author of this plugin learn how to somewhat deal
-with beast such as VimScript:
+Knowledge base which somewhat helped in dealing with beast such as VimScript,
+plus some general mentions:
 * Authors of following plugins:
   - https://github.com/junegunn/vim-plug
   - https://github.com/fatih/vim-go
-* Author of following book on the topic of VimScript
+* Author of the following book on the topic of VimScript
   - https://learnvimscriptthehardway.stevelosh.com
 * ASCII Font:
   - ansishadow
+* Debian/Ubuntu package maintainers
+* Authors of `DICT` protocol, `dict` and `dictd` programs
+* Authors of WordNet lexical database https://wordnet.princeton.edu
 
 vim:tw=78:ts=8:et:ft=help:norl:
