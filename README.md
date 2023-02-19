@@ -28,7 +28,8 @@ of specific English words while reading a book or technical documentation.
 
 It uses WordNet dictionary by default, however this option is configurable.
 
-Current implementation has only been tested on Linux.
+Current implementation has been tested on various Linux distributions and
+MacOS.
 
 ## Installation
 Prerequisites:
