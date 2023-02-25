@@ -66,7 +66,7 @@ self-hosted server if that's something you'd like to host) `dict` server.
 * Use `WordDefinitionOfflineDictionary` function to use offline dictionary
 running on your machine.
 
-###### Ubuntu
+###### Debian/Ubuntu
 * Install `dictd` package:
 ```bash
 $ sudo apt install dictd
@@ -98,22 +98,22 @@ Fedora doesn't provide dictionaries that can be used by `dict` via package
 manager. This means you'll have to download dictionaries you want, package them
 in format `dict` understands and configure `dictd` to serve database and index.
 
-Approach taken in this example uses `.deb` package downloaded on Ubuntu box,
-extracted via `dpkg-deb` and copied on Fedora box.
+Approach taken in this example uses `.deb` package downloaded on Debian/Ubuntu
+box, extracted via `dpkg-deb` and copied on Fedora box.
 
 If you decide to package dictionaries yourself, take a look into options that
 `dictfmt` and `dictzip` provide.
 
-* (Ubuntu box) Download `dict-wn` package:
+* (Debian/Ubuntu box) Download `dict-wn` package:
 ```bash
 $ apt update && apt download dict-wn
 ```
-* (Ubuntu box) Extract `.deb` package (package version you download may be
-different):
+* (Debian/Ubuntu box) Extract `.deb` package (package version you download may
+be different):
 ```bash
 $ mkdir -p /tmp/dict && dpkg-deb -R dict-wn_1%3a3.0-36_all.deb /tmp/dict
 ```
-* (Ubuntu box) Copy extracted files to Fedora box, namely:
+* (Debian/Ubuntu box) Copy extracted files to Fedora box, namely:
   - `/tmp/dict/usr/share/dictd/wn.dict.dz`
   - `/tmp/dict/usr/share/dictd/wn.index`
 * (Fedora box) Install `dictd` package:
