@@ -145,7 +145,7 @@ $ cd -
 ```
 * (Fedora box) Adjust `dictd` configuration to point to dictionary files:
 ```bash
-$ sudo $EDITOR /etc/dictd.conf
+$ sudoedit /etc/dictd.conf
 global {
    listen_to 127.0.0.1
 }
