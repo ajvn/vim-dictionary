@@ -58,7 +58,7 @@ or
 #### Offline dictionary
 It is possible to setup offline dictionary, depending on your platform this
 might be more or less straightforward. Focus in these examples is on WordNet
-dictionary, but you are free to use any others you might like better.
+dictionary, but you are free to use any other you might like better.
 
 Support relies on `dictd` package which provides local (or publicly exposed
 self-hosted server if that's something you'd like to host) `dict` server.
